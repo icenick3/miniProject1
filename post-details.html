@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="posts-information"></div>
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
+        .then(response => response.json())
+        .then(posts => {
+            let postsInformation = document.getElementsByClassName('posts-information')[0];
+            let divInformation = document.createElement('div');
+            for (const post of posts) {
+                console.log(posts)
+                divInformation.innerHTML = `Id: ${post.id}. </br> Title: ${post.title}. </br> Body: ${post.body}.`;
+                postsInformation.append(divInformation);
+            }
+            fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+                .then(response => response.json())
+                .then(coments => {
+                    let pComent = document.createElement('p');
+                    for (coment of coments){
+
+                        pComent.innerHTML = `Coment:${coment.body}.`;
+                        let postInformation2 = document.getElementsByClassName('posts-information')[0];
+                        postInformation2.append(pComent)
+
+                    }
+                });
+        });
+
+</script>
+</body>
+</html>

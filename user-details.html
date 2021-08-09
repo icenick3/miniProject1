@@ -3,51 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style3.css">
 </head>
 <body>
 <div class="user-Information"></div>
-<ul class="posts-box"></ul>
+<div class="posts-box"></div>
 <script>
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('id');
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
         .then(response => response.json())
-            .then(user => {
-                let userInformation = document.getElementsByClassName('user-Information')[0];
-                let divInformation = document.createElement('div');
-                divInformation.innerHTML = `Username: ${user.username} </br> Email: ${user.email} </br> Street: ${user.address.street} </br> Suite: ${user.address.suite} </br> City: ${user.address.city} </br> Zipcode: ${user.address.zipcode} </br> Geolocation: ${user.address.geo.lat} ${user.address.geo.lng}`;
-                userInformation.append(divInformation);
-                let detailsBtn = document.createElement('button');
-                detailsBtn.innerText = 'Post of current user';
-                detailsBtn.onclick = function () {
-                    fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
+        .then(users => {
+            console.log(users)
+            let userInformation = document.getElementsByClassName('user-Information')[0];
+            let divInformation = document.createElement('div');
+            divInformation.className = 'divinformation'
+            divInformation.innerHTML = `Id: ${users.id} </br> Name: ${users.name} </br> Username: ${users.username} </br> Email: ${users.email} </br> Street: ${users.address.street} </br> Suite: ${users.address.suite} </br> Address: </br>    city: ${users.address.city}
+                                               </br>    zipcode: ${users.address.zipcode} </br>    geolocation: ${users.address.geo.lat} ${users.address.geo.lng} </br> Phone: ${users.phone} </br> Website: ${users.website} </br> Company: </br>   name: ${users.company.name} </br>
+                                                    catchPhras: ${users.company.catchPhras} </br>    bs: ${users.company.bs} `;
+            userInformation.append(divInformation);
+            let detailsBtn = document.createElement('button');
+            detailsBtn.className = 'detailsBtn'
+            detailsBtn.innerText = 'Post of current user';
+            detailsBtn.onclick = function () {
+                fetch(`https://jsonplaceholder.typicode.com/users/${users.id}/posts`)
                     .then(value => value.json())
                     .then(value => {
                         let postsBox = document.getElementsByClassName('posts-box')[0];
                         postsBox.innerHTML = '';
-                      for (const post of value){
-                          let postsBtn = document.createElement('button');
-                          postsBtn.innerText = 'POST DETAILS';
-                          postsBtn.onclick = function (){
-                              document.location = `post-details.html?id=${user.id}`
-
-                          }
-                          let liPosts = document.createElement('li');
-                          liPosts.className = 'posts';
-                          liPosts.innerText = post.title;
-                          postsBox.append(liPosts);
-                          liPosts.append(postsBtn);
-
-                      }
-
-
+                        for (const post of value){
+                            console.log(post)
+                            let postsBtn = document.createElement('button');
+                            postsBtn.className = 'postsBtn'
+                            postsBtn.innerText = 'POST DETAILS';
+                            postsBtn.onclick = function (){
+                                document.location = `post-details.html?id=${users.id}&postId=${post.id}`
+                            }
+                            let divPosts = document.createElement('div');
+                            divPosts.className = 'divPosts'
+                            divPosts.innerText = post.title;
+                            postsBox.append(divPosts);
+                            divPosts.append(postsBtn);
+                        }
                     });
-
-                };
-                        userInformation.append(detailsBtn)
-
-
+            };
+            userInformation.append(detailsBtn)
         });
 
 

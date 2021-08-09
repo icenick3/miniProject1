@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.posts-information{
+    font-size: 30px;
+    margin: 30px;
+
+}
+
+.posts{
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.postsComment{
+    width: 21%;
+    margin: 30px;
+    border: black 2px solid;
+}

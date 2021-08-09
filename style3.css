@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.user-Information{
+    display: flex;
+    flex-direction: column;
+}
+
+.divinformation{
+   font-size: 30px;
+    margin-top: 30px;
+    margin-left: 100px ;
+}
+
+.detailsBtn{
+    font-size: 40px;
+    width: 90%;
+    border-radius: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.posts-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.divPosts{
+    width: 14%;
+    margin: 45px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+
+.postsBtn{
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
